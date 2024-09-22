@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # path('',include('Cargos.urls')),
-    path('',include('Empleados.urls')),
-    # path('',include('Servicios.urls')),
+    # path('',include('Empleados.urls')),
+    path('',include('Servicios.urls')),
 ]

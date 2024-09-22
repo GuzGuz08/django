@@ -5,14 +5,14 @@
     <h2>Gestion de Empleados</h2>
     <div class="card">
       <div class="card-body">
-        <form action="/edicionEmpleado/" method="POST">
+        <form action="/edicionServicio/" method="POST">
           {% csrf_token %}
           <div class="form-group">
             <input
               type="number"
               id="ID"
               name="ID"
-              value="{{empleado.Codigo_Empleado}}"
+              value="{{servicio.Codigo_Servicio}}"
               class="form-control"
               placeholder=""
               readonly
@@ -24,9 +24,9 @@
               type="text"
               id="nombre"
               name="nombre"
-              value="{{empleado.Nombre}}"
+              value="{{servicio.Nombre}}"
               class="form-control"
-              placeholder="Nombre"
+             
               required
             />
           </div>
@@ -34,48 +34,23 @@
           <div class="form-group">
             <input
               type="text"
-              id="apellido"
-              name="apellido"
-              value="{{empleado.Apellido}}"
+              id="precio"
+              name="precio"
+              value="{{servicio.Precio}}"
               class="form-control"
-              placeholder="Apellido"
+              
               
             />
           </div>
           <br>
           <div class="form-group">
             <input
-              type="number"
-              id="telefono"
-              name="telefono"
-              value="{{empleado.Telefono}}"
+              type="text"
+              id="descripcion"
+              name="descripcion"
+              value="{{servicio.Descripcion}}"
               class="form-control"
-              placeholder="telefono"
               
-            />
-          </div>
-          <br>
-          <div class="form-group">
-            <input
-              type="email"
-              id="emain"
-              name="email"
-              value="{{empleado.Email}}"
-              class="form-control"
-              placeholder="email@.com"
-              
-            />
-          </div>
-          <br>
-          <div class="form-group">
-            <input
-              type="number"
-              id="cargoid"
-              name="cargoid"
-              value="{{empleado.Codigo_Cargo_id}}"
-              class="form-control"
-              placeholder=""
-              readonly
               
             />
           </div>

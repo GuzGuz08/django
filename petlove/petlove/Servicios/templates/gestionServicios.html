@@ -1,0 +1,91 @@
+{% extends "./base.html" %} {% block title %} gestion de servicios{% endblock %}
+{% block body %}
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-dismissible alert-success fade show" id="alert-{{forloop.counter}}">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong class="text-dark">{{message}}</strong>
+    </div>
+
+
+    {% endfor %}
+    {% endif %}
+
+    
+<!-- Asegúrate de incluir jQuery y Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Esperar 3 segundos antes de cerrar cada alerta
+        setTimeout(function() {
+            {% for message in messages %}
+            var alert = document.getElementById('alert-{{ forloop.counter }}');
+            if (alert) {
+                // Usar jQuery para manejar la transición de Bootstrap
+                $(alert).alert('close');
+            }
+            {% endfor %}
+        }, 3000); // 3000 ms = 3 seconds
+    });
+</script>
+    
+    <h2>Añadir nuevo servicio</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="/registrarServicios/" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input type="number" id="ID" name="ID" class="form-control" placeholder="ID"  required>
+                </div><br>
+                <div class="form-group">
+                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+                </div><br>
+                <div class="form-group">
+                    <input type="number" id="precio" name="precio" class="form-control" placeholder="precio" required>
+                </div><br>
+                <div class="form-group">
+                    <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Descripcion" required>
+                </div><br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block text-white">Crear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-9 col-xl-9">
+    <h1>Listado de servicios</h1>
+    <div class="table-responsive py-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Codigo servicio</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Descripcion</th>
+                    <th colspan="2">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in servicios %}
+                
+                <tr>
+                    <td> {{forloop.counter}} </td>
+                    <td> {{c.Codigo_Servicio}} </td>
+                    <td> {{c.Nombre}} </td>
+                    <td> {{c.Precio}} </td>
+                    <td> {{c.Descripcion}} </td>
+                    <td><a href="editarServicio/{{c.Codigo_Servicio}}" class="btn btn-info">Editar</a></td>
+                    <td><a href="eliminarServicio/{{c.Codigo_Servicio}}" class="btn btn-danger btnElimiacion">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
