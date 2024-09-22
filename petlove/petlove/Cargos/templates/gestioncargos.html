@@ -1,0 +1,80 @@
+{% extends "./base.html" %} {% block title %} gestion de cargos {% endblock %}
+{% block body %}
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-dismissible alert-success fade show" id="alert-{{forloop.counter}}">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong class="text-dark">{{message}}</strong>
+    </div>
+
+
+    {% endfor %}
+    {% endif %}
+
+    
+<!-- Asegúrate de incluir jQuery y Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Esperar 3 segundos antes de cerrar cada alerta
+        setTimeout(function() {
+            {% for message in messages %}
+            var alert = document.getElementById('alert-{{ forloop.counter }}');
+            if (alert) {
+                // Usar jQuery para manejar la transición de Bootstrap
+                $(alert).alert('close');
+            }
+            {% endfor %}
+        }, 3000); // 3000 ms = 3 seconds
+    });
+</script>
+    
+    <h2>Añadir nuevo Cargo</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="/registrarCargo/" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input type="number" id="ID" name="ID" class="form-control" placeholder="ID"  required>
+                </div><br>
+                <div class="form-group">
+                    <input type="text" id="txtdescripcion" name="txtdescripcion" class="form-control" placeholder="Descripcion" required>
+                </div><br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block text-white">Crear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <h1>Listado de cargos</h1>
+    <div class="table-responsive py-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Codigo Cargo</th>
+                    <th>Descripcion</th>
+                    <th colspan="2">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in Cargos %}
+                <tr>
+                    <td> {{forloop.counter}} </td>
+                    <td> {{c.Codigo_Cargo_id}} </td>
+                    <td> {{c.Descripcion}} </td>
+                    <td><a href="editarCargo/{{c.Codigo_Cargo_id}}" class="btn btn-info">Editar</a></td>
+                    <td><a href="eliminarCargo/{{c.Codigo_Cargo_id}}" class="btn btn-danger btnElimiacion">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

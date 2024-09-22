@@ -1,0 +1,46 @@
+{% extends "./base.html" %} 
+{% block title %} Editar Cargo {% endblock %} 
+{%block body %}
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h2>Gestion de cargos</h2>
+    <div class="card">
+      <div class="card-body">
+        <form action="/edicionCargo/" method="POST">{% csrf_token %}
+          <div class="form-group">
+            <input
+              type="number"
+              id="ID"
+              name="ID"
+              value="{{cargo.Codigo_Cargo_id}}"
+              class="form-control"
+              placeholder=""
+              readonly
+              
+              
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtdescripcion"
+              name="txtdescripcion"
+              value="{{cargo.Descripcion}}"
+              class="form-control"
+              placeholder="Descripcion"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

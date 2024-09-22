@@ -1,0 +1,93 @@
+{% extends "./base.html" %} {% block title %} Editar Empleado {% endblock %}
+{%block body %}
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h2>Gestion de Empleados</h2>
+    <div class="card">
+      <div class="card-body">
+        <form action="/edicionEmpleado/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="number"
+              id="ID"
+              name="ID"
+              value="{{empleado.Codigo_Empleado}}"
+              class="form-control"
+              placeholder=""
+              readonly
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              value="{{empleado.Nombre}}"
+              class="form-control"
+              placeholder="Nombre"
+              required
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              value="{{empleado.Apellido}}"
+              class="form-control"
+              placeholder="Apellido"
+              
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <input
+              type="number"
+              id="telefono"
+              name="telefono"
+              value="{{empleado.telefono}}"
+              class="form-control"
+              placeholder="telefono"
+              
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <input
+              type="email"
+              id="emain"
+              name="email"
+              value="{{empleado.Email}}"
+              class="form-control"
+              placeholder="email@.com"
+              
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <input
+              type="number"
+              id="cargoid"
+              name="cargoid"
+              value="{{empleado.Codigo_Cargo_id}}"
+              class="form-control"
+              placeholder=""
+              readonly
+              
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
